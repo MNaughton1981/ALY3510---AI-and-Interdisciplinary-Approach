@@ -17,46 +17,36 @@
     margin: 0;
     padding: 0;
   }
-  .page {
+  .sheet {
     background: #fff;
     width: 8.5in;
-    min-height: 11in;
     margin: 24px auto;
     padding: 1in;
     box-sizing: border-box;
     box-shadow: 0 1px 6px rgba(0,0,0,.25);
-    position: relative;
-  }
-  .running-head {
-    position: absolute;
-    top: 0.5in; left: 1in; right: 1in;
-    display: flex; justify-content: space-between;
-    font-size: 12pt; text-transform: uppercase;
-    letter-spacing: .5px;
   }
   p { margin: 0; text-indent: 0.5in; text-align: left; }
   p.flush { text-indent: 0; }
 
   /* Title page */
-  .title-page { text-align: center; }
-  .title-page .spacer { height: 2.5in; }
-  .title-page h1 {
-    font-size: 12pt; font-weight: bold; line-height: 2; margin: 0 0 2em 0;
+  .title-page {
+    min-height: 9in;
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center;
+    page-break-after: always;
   }
-  .title-page .meta { line-height: 2; }
+  .title-page .spacer { height: 2.5in; }
+  .title-page h1 { font-size: 12pt; font-weight: bold; line-height: 2; margin: 0 0 2em 0; }
+  .title-page .meta p { line-height: 2; }
 
   /* Headings (APA levels) */
-  h2.title-centered { /* Level repeated title on p.1 of body */
-    font-size: 12pt; font-weight: bold; text-align: center; margin: 0 0 0 0;
-  }
-  h2.l1 { font-size: 12pt; font-weight: bold; text-align: center; margin: 1em 0 0 0; }
-  h3.l2 { font-size: 12pt; font-weight: bold; text-align: left; margin: 1em 0 0 0; }
-  h4.l3 { font-size: 12pt; font-weight: bold; font-style: italic; text-align: left; margin: 1em 0 0 0; }
+  h2.title-centered { font-size: 12pt; font-weight: bold; text-align: center; margin: 0 0 0 0; }
+  h2.l1 { font-size: 12pt; font-weight: bold; text-align: center; margin: 1em 0 0 0; page-break-after: avoid; }
+  h3.l2 { font-size: 12pt; font-weight: bold; text-align: left; margin: 1em 0 0 0; page-break-after: avoid; }
 
   /* References */
-  .references p {
-    text-indent: -0.5in; padding-left: 0.5in; margin: 0;
-  }
+  .references p { text-indent: -0.5in; padding-left: 0.5in; margin: 0; }
+  a { color: #0b3d91; }
 
   /* Figures */
   figure { margin: 1.5em 0; text-align: center; page-break-inside: avoid; }
@@ -69,7 +59,6 @@
     padding: 1.2em; border-radius: 6px; line-height: 1.5; text-align: left;
     font-family: Arial, Helvetica, sans-serif; font-size: 10.5pt;
   }
-  .fill { background: #fff2b2; padding: 0 2px; border-radius: 2px; }
 
   table.compare { border-collapse: collapse; width: 100%; font-size: 11pt; line-height: 1.4; }
   table.compare caption { caption-side: top; text-align: left; line-height: 1.6; margin-bottom: .4em; }
@@ -77,7 +66,7 @@
   table.compare thead th { border-top: 2px solid #000; border-bottom: 2px solid #000; }
   table.compare tbody tr:last-child td { border-bottom: 2px solid #000; }
 
-  /* Author note / helper box shown on screen, hidden in print */
+  /* On-screen helper box (hidden in print/export) */
   .how-to {
     background: #e8f1ff; border: 1px solid #9bbcf0; border-radius: 8px;
     padding: 1em 1.4em; margin: 24px auto; width: 8.5in; box-sizing: border-box;
@@ -86,7 +75,7 @@
   .how-to h2 { margin-top: 0; font-size: 13pt; }
   @media print {
     body { background: #fff; }
-    .page { box-shadow: none; margin: 0; }
+    .sheet { box-shadow: none; margin: 0; padding: 0; width: auto; }
     .how-to { display: none; }
   }
 </style>
@@ -97,19 +86,16 @@
 <div class="how-to">
   <h2>Before you submit — read me (this box will not print/export)</h2>
   <ol>
-    <li><strong>Title page is complete</strong> (name, course, Professor Shapiro, Fall 2026, due date). Nothing to fill in there.</li>
-    <li><strong>Replace the two red dashed boxes</strong> (Figures 3 &amp; 4) with your own screenshots: Figure 3 = the project panel showing Class 1 (15 samples) and Class 2 (20 samples); Figure 4 = the live preview with the ~90% Class 1 result.</li>
-    <li><strong>Export to PDF:</strong> use your browser's Print → "Save as PDF." The filename should be <code>ALY3510_FirstnameLastname_WeekX_Term_Year.pdf</code>. (This HTML file is already an accepted format if you prefer to submit it directly.)</li>
-    <li>Read through the prose and <strong>put it in your own voice</strong> — adjust claims to match what you actually saw.</li>
+    <li><strong>Title page and text are complete.</strong> Nothing to fill in.</li>
+    <li><strong>Add your two screenshots</strong> in place of the red dashed boxes: <em>Figure 2</em> = the project panel showing Class 1 (15 samples) and Class 2 (20 samples); <em>Figure 3</em> = the live preview with the ~90% Class 1 result.</li>
+    <li><strong>Export to PDF:</strong> browser menu &rarr; Print &rarr; "Save as PDF." In the print dialog you can enable <em>Headers and footers</em> if you want page numbers. Save as <code>ALY3510_MatthewNaughton_Week4_Fall_2026.pdf</code>.</li>
   </ol>
 </div>
 
+<div class="sheet">
+
 <!-- ============ TITLE PAGE ============ -->
-<section class="page title-page">
-  <div class="running-head">
-    <span>Teaching a Machine to See</span>
-    <span>1</span>
-  </div>
+<section class="title-page">
   <div class="spacer"></div>
   <h1>Teaching a Machine to See:<br>Learning From Data With Google's Teachable Machine</h1>
   <div class="meta">
@@ -122,157 +108,173 @@
   </div>
 </section>
 
-<!-- ============ BODY PAGE 1 ============ -->
-<section class="page">
-  <div class="running-head">
-    <span>Teaching a Machine to See</span>
-    <span>2</span>
-  </div>
+<!-- ============ BODY ============ -->
+<h2 class="title-centered">Teaching a Machine to See:<br>Learning From Data With Google's Teachable Machine</h2>
 
-  <h2 class="title-centered">Teaching a Machine to See:<br>Learning From Data With Google's Teachable Machine</h2>
+<p>Machine learning is often explained in abstract or highly technical terms, but the basic idea is fairly intuitive. Instead of programming a system with a complete set of rules, we give it examples and allow it to identify patterns in those examples (Russell &amp; Norvig, 2021). Google's Teachable Machine makes that process visible by allowing users to train image, audio, and pose classifiers directly in a web browser without writing code (Carney et al., 2020; Google, n.d.).</p>
 
-  <p>Machine learning is often described in abstract terms, yet the core idea is intuitive: a system improves at a task by being exposed to examples rather than by following explicitly programmed rules (Russell &amp; Norvig, 2021). Google's Teachable Machine makes this idea tangible by letting anyone train an image, audio, or pose classifier directly in a web browser, with no code required (Carney et al., 2020). For this exercise, a two-class image classifier was trained on webcam selfies of myself. As the analysis will show, the way I defined those two classes turned the project into an unexpectedly clear demonstration of how a model learns the statistics of the images it is given rather than the idea the designer had in mind. This essay documents how the model learned from that data, what was observed during training and testing, and how the machine's learning process resembles and diverges from human learning. The central argument is that Teachable Machine is a faithful small-scale demonstration of statistical pattern learning, but that this very fidelity exposes the deep gap between correlation-based machine learning and the conceptual, data-efficient learning characteristic of people.</p>
+<p>For this exercise, I trained a two-class image classifier using webcam selfies. I originally thought I was teaching the model to recognize two different concepts: facial expressions and camera perspectives. What I actually taught it was something much simpler. The model learned that forward-facing images belonged in one class and images with a turned head or a hand near the face belonged in the other. That difference between what I intended and what the model learned became the most useful part of the project. It showed that a machine-learning model responds to patterns in its training data, not to the meaning its designer has in mind.</p>
 
-  <h2 class="l1">How the Model Learned From Data</h2>
+<h2 class="l1">How the Model Learned From Data</h2>
 
-  <p>Teachable Machine is built on TensorFlow.js and runs entirely in the browser (Carney et al., 2020). For image projects it does not train a neural network from scratch. Instead it uses a technique called <em>transfer learning</em> on top of MobileNet, a convolutional neural network that was previously trained on the large ImageNet dataset to recognize general visual features such as edges, textures, and shapes (Howard et al., 2017). The pre-trained portion of the network is frozen and used as a fixed <em>feature extractor</em>: each uploaded image is converted into a compact numerical vector, or embedding, that summarizes its visual content. Only a small classifier layer on top is actually trained on the user's examples. This is why a usable model can be produced in seconds from a few dozen images rather than requiring thousands of samples and hours of computation.</p>
+<p>Teachable Machine is built on TensorFlow.js and runs in the browser (Carney et al., 2020). For an image project like this one, it does not train an entire neural network from the beginning. It uses transfer learning with MobileNet, a convolutional neural network that was previously trained on the ImageNet dataset to recognize common visual features such as edges, textures, and shapes (Howard et al., 2017).</p>
 
-  <p>The training itself follows the standard supervised-learning loop. Each sample carries a label (the class the user assigned it to), and the model repeatedly adjusts the weights of its final layer to reduce the gap between its predictions and those labels. This gap is measured by a loss function (categorical cross-entropy), and the weights are updated through backpropagation and gradient descent across several passes over the data called <em>epochs</em> (Goodfellow et al., 2016). Teachable Machine exposes a few of these controls under advanced settings — epochs, batch size, and learning rate — which lets a learner see directly how optimization hyperparameters influence the result. Figure 1 summarizes this pipeline.</p>
+<p>The pre-trained part of the network remains frozen and works as a feature extractor. Each image is converted into a numerical representation, called an embedding, that summarizes its visual features. Teachable Machine then trains a much smaller classifier to connect those features to the labels assigned by the user. Because MobileNet has already learned how to identify useful visual patterns, Teachable Machine can produce a usable classifier from a relatively small number of examples in only a few seconds.</p>
 
-  <figure>
-    <svg viewBox="0 0 760 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Teachable Machine training pipeline diagram">
-      <defs>
-        <marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
-          <path d="M0,0 L7,3 L0,6 Z" fill="#222"/>
-        </marker>
-        <style>
-          .box{fill:#eef3fb;stroke:#2b4b7e;stroke-width:1.5;}
-          .fx{fill:#fde9d9;stroke:#b5651d;stroke-width:1.5;}
-          .lbl{font-family:Arial, Helvetica, sans-serif;font-size:12px;fill:#111;}
-          .sub{font-family:Arial, Helvetica, sans-serif;font-size:9.5px;fill:#444;}
-          .edge{stroke:#222;stroke-width:1.6;fill:none;}
-        </style>
-      </defs>
-      <rect class="box" x="10"  y="55" width="120" height="70" rx="8"/>
-      <text class="lbl" x="70" y="82" text-anchor="middle">Collect &amp;</text>
-      <text class="lbl" x="70" y="98" text-anchor="middle">label samples</text>
-      <text class="sub" x="70" y="114" text-anchor="middle">(classes)</text>
+<p>The training process follows the standard supervised-learning cycle. Each image is paired with a label, and the model makes a prediction about which class that image belongs to. It then compares its prediction with the correct label and measures the difference using a loss function. Through backpropagation and gradient descent, the model adjusts the weights in its classifier to reduce that error. It repeats this process over multiple passes through the training data, known as epochs (Goodfellow et al., 2016).</p>
 
-      <rect class="fx" x="170" y="55" width="140" height="70" rx="8"/>
-      <text class="lbl" x="240" y="82" text-anchor="middle">MobileNet</text>
-      <text class="lbl" x="240" y="98" text-anchor="middle">feature extractor</text>
-      <text class="sub" x="240" y="114" text-anchor="middle">(frozen, pre-trained)</text>
+<p>Teachable Machine also provides advanced settings for epochs, batch size, and learning rate. These settings are not necessary for creating a basic model, but they help show how the training process can be adjusted. The overall process moves from collecting and labeling examples to extracting visual features, training the classifier, testing the results, and making changes when the model does not behave as expected.</p>
 
-      <rect class="box" x="350" y="55" width="140" height="70" rx="8"/>
-      <text class="lbl" x="420" y="82" text-anchor="middle">Train classifier</text>
-      <text class="lbl" x="420" y="98" text-anchor="middle">head</text>
-      <text class="sub" x="420" y="114" text-anchor="middle">(loss + backprop)</text>
+<figure>
+  <svg viewBox="0 0 760 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Teachable Machine training pipeline diagram">
+    <defs>
+      <marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+        <path d="M0,0 L7,3 L0,6 Z" fill="#222"/>
+      </marker>
+      <style>
+        .box{fill:#eef3fb;stroke:#2b4b7e;stroke-width:1.5;}
+        .fx{fill:#fde9d9;stroke:#b5651d;stroke-width:1.5;}
+        .lbl{font-family:Arial, Helvetica, sans-serif;font-size:12px;fill:#111;}
+        .sub{font-family:Arial, Helvetica, sans-serif;font-size:9.5px;fill:#444;}
+        .edge{stroke:#222;stroke-width:1.6;fill:none;}
+      </style>
+    </defs>
+    <rect class="box" x="10"  y="55" width="120" height="70" rx="8"/>
+    <text class="lbl" x="70" y="82" text-anchor="middle">Collect &amp;</text>
+    <text class="lbl" x="70" y="98" text-anchor="middle">label samples</text>
+    <text class="sub" x="70" y="114" text-anchor="middle">(classes)</text>
 
-      <rect class="box" x="530" y="55" width="120" height="70" rx="8"/>
-      <text class="lbl" x="590" y="82" text-anchor="middle">Preview &amp;</text>
-      <text class="lbl" x="590" y="98" text-anchor="middle">test (live)</text>
+    <rect class="fx" x="170" y="55" width="140" height="70" rx="8"/>
+    <text class="lbl" x="240" y="82" text-anchor="middle">MobileNet</text>
+    <text class="lbl" x="240" y="98" text-anchor="middle">feature extractor</text>
+    <text class="sub" x="240" y="114" text-anchor="middle">(frozen, pre-trained)</text>
 
-      <rect class="box" x="680" y="55" width="70" height="70" rx="8"/>
-      <text class="lbl" x="715" y="90" text-anchor="middle">Export</text>
-      <text class="sub" x="715" y="106" text-anchor="middle">TF.js / TFLite</text>
+    <rect class="box" x="350" y="55" width="140" height="70" rx="8"/>
+    <text class="lbl" x="420" y="82" text-anchor="middle">Train classifier</text>
+    <text class="lbl" x="420" y="98" text-anchor="middle">head</text>
+    <text class="sub" x="420" y="114" text-anchor="middle">(loss + backprop)</text>
 
-      <line class="edge" x1="130" y1="90" x2="168" y2="90" marker-end="url(#arrow)"/>
-      <line class="edge" x1="310" y1="90" x2="348" y2="90" marker-end="url(#arrow)"/>
-      <line class="edge" x1="490" y1="90" x2="528" y2="90" marker-end="url(#arrow)"/>
-      <line class="edge" x1="650" y1="90" x2="678" y2="90" marker-end="url(#arrow)"/>
+    <rect class="box" x="530" y="55" width="120" height="70" rx="8"/>
+    <text class="lbl" x="590" y="82" text-anchor="middle">Preview &amp;</text>
+    <text class="lbl" x="590" y="98" text-anchor="middle">test (live)</text>
 
-      <path class="edge" d="M590,125 L590,160 L420,160 L420,127" marker-end="url(#arrow)"/>
-      <text class="sub" x="505" y="175" text-anchor="middle">retrain with more / better samples</text>
-    </svg>
-    <figcaption><span class="fig-num">Figure 1</span><br><span class="fig-title">The Teachable Machine Image-Classification Pipeline</span><br>Note. The pre-trained MobileNet layers are frozen and act as a fixed feature extractor; only the final classifier head is trained on the user's labeled samples. Adapted from the general transfer-learning approach described by Carney et al. (2020) and Howard et al. (2017).</figcaption>
-  </figure>
+    <rect class="box" x="680" y="55" width="70" height="70" rx="8"/>
+    <text class="lbl" x="715" y="90" text-anchor="middle">Export</text>
+    <text class="sub" x="715" y="106" text-anchor="middle">TF.js / TFLite</text>
 
-</section>
+    <line class="edge" x1="130" y1="90" x2="168" y2="90" marker-end="url(#arrow)"/>
+    <line class="edge" x1="310" y1="90" x2="348" y2="90" marker-end="url(#arrow)"/>
+    <line class="edge" x1="490" y1="90" x2="528" y2="90" marker-end="url(#arrow)"/>
+    <line class="edge" x1="650" y1="90" x2="678" y2="90" marker-end="url(#arrow)"/>
 
-<!-- ============ BODY PAGE 2 ============ -->
-<section class="page">
-  <div class="running-head">
-    <span>Teaching a Machine to See</span>
-    <span>3</span>
-  </div>
+    <path class="edge" d="M590,125 L590,160 L420,160 L420,127" marker-end="url(#arrow)"/>
+    <text class="sub" x="505" y="175" text-anchor="middle">retrain with more / better samples</text>
+  </svg>
+  <figcaption><span class="fig-num">Figure 1</span><br><span class="fig-title">The Teachable Machine Image-Classification Pipeline</span><br>Note. The process moves from collecting and labeling samples to extracting features with MobileNet, training the classifier, testing it in the live preview, and exporting or retraining the model. Adapted from Carney et al. (2020) and Howard et al. (2017).</figcaption>
+</figure>
 
-  <h2 class="l1">What Was Observed</h2>
+<h2 class="l1">What I Observed</h2>
 
-  <h3 class="l2">Experimental Setup</h3>
-  <p>An Image Project was created with two classes of webcam selfies, captured at my desk under ordinary indoor lighting. I intended the two classes to capture two different ideas: <em>Class 1</em> (15 image samples) was meant to represent my <em>facial expressions</em> and consisted of straight-on, forward-facing shots in which I varied my expression; <em>Class 2</em> (20 image samples) was meant to represent different <em>camera perspectives</em> and consisted of shots taken from varied head angles — profile, looking up and down, and turning left and right, often with a hand resting near my chin. In total only 35 images were used. The model was trained with the default settings and tested in the live preview window using poses it had not seen during capture. As the observations below explain, defining the two classes along different conceptual dimensions — expression versus viewpoint — rather than as two parallel categories proved to be the most revealing part of the experiment.</p>
+<h3 class="l2">Experimental Setup</h3>
 
-  <div class="placeholder">
-    REPLACE THIS BOX WITH FIGURE 3 — a screenshot of your Teachable Machine project showing Class 1 (15 samples) and Class 2 (20 samples) with their sample thumbnails. Add a caption below it in APA format, e.g.:<br><br>
-    <strong>Figure 3</strong><br><em>Trained Two-Class Selfie Classifier Showing Class 1 (Expressions, 15 Samples) and Class 2 (Perspectives, 20 Samples)</em><br>Note. Screenshot by the author.
-  </div>
+<p>I created an Image Project with two classes of webcam selfies taken at my desk under ordinary indoor lighting. Class 1 contained 15 images and was intended to represent facial expressions. These were mostly straight-on, forward-facing pictures in which I changed my expression. Class 2 contained 20 images and was intended to represent different camera perspectives. These included profile views, upward and downward angles, and images in which I turned my head to the left or right. In several Class 2 images, I also rested a hand near my chin.</p>
 
-  <h3 class="l2">Observations During Training and Testing</h3>
-  <p>My first observation was simply how quickly and confidently the model trained. Despite a tiny dataset of only 35 images, training completed in a few seconds and the live preview produced decisive predictions — a direct consequence of the pre-trained MobileNet features doing most of the work. When I sat straight on and looked directly into the webcam, the model classified me as <em>Class 1</em> with about 90% confidence, leaving roughly 10% for <em>Class 2</em> (see Figure 4). When I instead turned my head into a profile, looked up or down, or raised a hand toward my chin, the prediction swung toward <em>Class 2</em>.</p>
+<p>The complete dataset contained only 35 images. I trained the model using the default settings and then tested it in the live preview with poses and expressions that were not included in the original training samples.</p>
 
-  <p>The most instructive observation, however, was about <em>what the model actually learned</em>. I had intended <em>Class 1</em> to represent facial expressions and <em>Class 2</em> to represent camera perspectives — two conceptually different ideas. But the model has no access to my intent; it only sees two sets of images and searches for the pixel pattern that best separates them. Because my Class 1 samples were almost all forward-facing while my Class 2 samples showed turned heads and angled views (often with a hand near my face), the feature that most reliably told the two sets apart was <em>head orientation and hand presence</em>, not expression versus viewpoint. This explained the behavior I saw: changing my expression while facing forward barely moved the prediction, whereas changing only my head angle flipped it. The model had learned the surface cue that happened to divide my two folders of images, not the abstract distinction I had in mind.</p>
+<p>Looking back, the most important decision was how I defined the classes. Rather than creating two parallel categories, I tried to teach the model two different ideas at the same time. Class 1 emphasized expression, while Class 2 emphasized viewpoint. This made it difficult to tell which visual characteristic the model would use to separate them.</p>
 
-  <p>Two further observations followed from this. First, the dataset was both small and imbalanced — 15 versus 20 images — yet the model still produced confident outputs, a useful warning that a model can look convincing while having learned the wrong thing. Second, and more fundamentally, this is a textbook case of a model optimizing for whatever statistical signal most reliably separates the classes in the training data rather than for the concept the human intended (Lake et al., 2017). A cleaner experiment would isolate a single dimension — for instance, holding my head angle fixed and varying only my expression — so that each label corresponds to one well-defined distinction. The flawed design was, in the end, more illuminating than a tidy result would have been, because it exposed the gap between my intention and the model's actual learning.</p>
+<div class="placeholder">
+  REPLACE THIS BOX WITH FIGURE 2 — your screenshot of the trained project showing Class 1 (15 samples) and Class 2 (20 samples) with their thumbnails. Keep the caption below it:<br><br>
+  <strong>Figure 2</strong><br><em>The Trained Two-Class Selfie Classifier, Showing Class 1 With 15 Expression Samples and Class 2 With 20 Perspective Samples</em><br>Note. Screenshot by the author.
+</div>
 
-  <div class="placeholder">
-    REPLACE THIS BOX WITH FIGURE 4 — your screenshot of the live preview (forward-facing selfie classified as Class 1 at ~90%). Caption example:<br><br>
-    <strong>Figure 4</strong><br><em>Live-Preview Classification of a Forward-Facing Selfie as Class 1 (≈90% Confidence)</em><br>Note. Screenshot by the author.
-  </div>
+<h3 class="l2">Observations During Training and Testing</h3>
 
-  <h2 class="l1">Machine Learning Versus Human Learning</h2>
+<p>The first thing I noticed was how quickly the model trained. Despite having only 35 images, the training process finished within a few seconds and produced confident predictions in the live preview. MobileNet's pre-trained visual features were doing much of the underlying work, so the smaller classifier only had to learn how those features related to my two labels.</p>
 
-  <h3 class="l2">Similarities</h3>
-  <p>Several parallels between the model's behavior and human learning are striking. Both learn inductively from examples rather than from exhaustive rules, and both improve as the quantity and variety of those examples increase. Both also benefit from prior knowledge: just as the model reused MobileNet's general visual features to learn a usable classifier from only 35 images, a person draws on a lifetime of prior visual experience when learning to recognize something new. Finally, both are prone to seizing on misleading shortcuts in biased examples — the model's reliance on head orientation parallels the way a young child, shown a narrow set of examples, may briefly treat an incidental feature as the defining one before refining the concept (Lake et al., 2017).</p>
+<p>When I sat straight on and looked directly into the webcam, the model classified the image as Class 1 with about 90 percent confidence. The remaining confidence was assigned to Class 2. When I turned my head into a profile, looked up or down, or raised a hand toward my chin, the prediction shifted toward Class 2.</p>
 
-  <h3 class="l2">Differences</h3>
-  <p>The differences, however, are more fundamental. Table 1 contrasts the two along several dimensions. In brief, humans are extraordinarily data-efficient, often learning a new category from one or two examples, whereas even a transfer-learning model benefits from many samples. Humans learn causal and semantic structure and can explain their reasoning, while the model learns only statistical correlations between pixels and labels and has no understanding of what it is classifying (Lake et al., 2017; Russell &amp; Norvig, 2021). Human learning is continual, embodied, and multimodal, whereas the model's learning is a discrete batch optimization that is frozen once training stops and is subject to catastrophic forgetting if retrained carelessly (Goodfellow et al., 2016).</p>
+<p>What I found most interesting was that changing my facial expression had very little effect when I continued facing forward. Changing only my head position, on the other hand, could cause the classification to flip. Once I noticed this, the model's behavior made much more sense.</p>
 
-</section>
+<p>I had intended Class 1 to represent expressions and Class 2 to represent camera perspectives. The model had no way to understand that intention. It only saw two groups of images and looked for the visual patterns that separated them most reliably. Nearly all the Class 1 images were forward-facing, while Class 2 contained turned heads, angled views, and several images with a hand near the face. Head orientation and hand placement therefore became much stronger dividing features than facial expression.</p>
 
-<!-- ============ BODY PAGE 3 ============ -->
-<section class="page">
-  <div class="running-head">
-    <span>Teaching a Machine to See</span>
-    <span>4</span>
-  </div>
+<p>The model had not learned the abstract difference between an expression and a camera perspective. It had learned a simpler statistical rule: forward-facing images usually belonged to Class 1, while angled images or images containing a hand near the face usually belonged to Class 2. That rule matched the training data even though it did not match the concept I thought I was teaching.</p>
 
-  <figure>
-    <table class="compare">
-      <caption><span class="fig-num">Table 1</span><br><span class="fig-title">A Comparison of the Teachable Machine Model and Human Learning</span></caption>
-      <thead>
-        <tr><th>Dimension</th><th>Teachable Machine model</th><th>Human learner</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Data needed</td><td>Dozens of labeled samples per class</td><td>Often one or a few examples</td></tr>
-        <tr><td>Basis of learning</td><td>Statistical correlation in pixels</td><td>Concepts, causes, and context</td></tr>
-        <tr><td>Prior knowledge</td><td>Fixed, from MobileNet pre-training</td><td>Rich, flexible, cross-domain</td></tr>
-        <tr><td>Explanation</td><td>None; outputs confidence scores only</td><td>Can reason about and justify choices</td></tr>
-        <tr><td>Over time</td><td>Frozen after training; can "forget"</td><td>Continual, cumulative learning</td></tr>
-        <tr><td>Modality</td><td>Single input type per model</td><td>Multimodal and embodied</td></tr>
-      </tbody>
-    </table>
-    <figcaption>Note. Synthesized from Goodfellow et al. (2016), Lake et al. (2017), and Russell and Norvig (2021).</figcaption>
-  </figure>
+<p>The small dataset was another limitation. With only 15 images in one class and 20 in the other, the model had very few examples from which to learn. The classes were also slightly imbalanced. Even so, the model produced confident results. This was an important reminder that confidence does not prove that a model has learned the correct concept. A model can make a decisive prediction based on an unintended shortcut in the data.</p>
 
-  <h2 class="l1">Conclusions</h2>
+<p>This behavior reflects a broader problem in machine learning. Models optimize for the statistical signals that best separate the labeled examples, which are not always the features a person considers meaningful (Lake et al., 2017). A better version of my experiment would isolate one variable at a time. For example, I could keep my head position and lighting consistent while changing only my expression. If I wanted to classify camera perspectives instead, I could keep my expression consistent while changing only the angle of my head.</p>
 
-  <p>Training a classifier in Teachable Machine demonstrated, in a few minutes and without code, the essential mechanics of supervised machine learning: labeled examples are converted into numerical features, and a model iteratively adjusts its parameters to minimize prediction error. The exercise made several abstract ideas concrete — transfer learning, the value of varied training data, confidence scores, and the risk of learning spurious correlations instead of the intended concept. At the same time, observing the model's limitations clarified how different machine learning is from human cognition. The model is a powerful pattern matcher that generalizes from statistics, but it does not understand, reason, or learn with the efficiency and flexibility of a person. For an analytics practitioner, the practical lesson is twofold: curating representative, unbiased training data is as important as any algorithmic choice, and model outputs should be interpreted as calibrated correlations rather than as human-like judgments. Training on my own selfies made this concrete: although I intended one class to represent facial expressions and the other to represent camera perspectives, the model simply learned the visual feature — head orientation — that happened to separate the two sets of images, classifying a forward-facing selfie as Class 1 with roughly 90% confidence regardless of my expression. No human observer would confuse "what expression is this?" with "which way is the head turned?", yet the model had no way to know which question I was asking. As I move further into analytical decision making, this exercise reinforces that the credibility of any model I build rests first on how carefully I define my classes and curate representative data.</p>
+<p>The flawed class design turned out to be more educational than a perfectly designed experiment might have been. It exposed the difference between my understanding of the categories and the information that was actually present in the dataset.</p>
 
-  <h2 class="l1">References</h2>
-  <div class="references">
-    <p>Carney, M., Webster, B., Alvarado, I., Phillips, K., Howell, N., Griffith, J., Jongejan, J., Pitaru, A., &amp; Chen, A. (2020). Teachable Machine: Approachable web-based tool for exploring machine learning classification. In <em>Extended abstracts of the 2020 CHI conference on human factors in computing systems</em> (pp. 1–8). Association for Computing Machinery. https://doi.org/10.1145/3334480.3382839</p>
+<div class="placeholder">
+  REPLACE THIS BOX WITH FIGURE 3 — your live-preview screenshot (forward-facing selfie classified as Class 1 at ~90%). Keep the caption below it:<br><br>
+  <strong>Figure 3</strong><br><em>Live-Preview Classification of a Forward-Facing Selfie as Class 1 With Approximately 90 Percent Confidence</em><br>Note. Screenshot by the author.
+</div>
 
-    <p>Goodfellow, I., Bengio, Y., &amp; Courville, A. (2016). <em>Deep learning</em>. MIT Press.</p>
+<h2 class="l1">Machine Learning Versus Human Learning</h2>
 
-    <p>Google. (n.d.). <em>Teachable Machine</em>. Retrieved October 3, 2026, from https://teachablemachine.withgoogle.com/</p>
+<h3 class="l2">Similarities</h3>
 
-    <p>Howard, A. G., Zhu, M., Chen, B., Kalenichenko, D., Wang, W., Weyand, T., Andreetto, M., &amp; Adam, H. (2017). <em>MobileNets: Efficient convolutional neural networks for mobile vision applications</em>. arXiv. https://doi.org/10.48550/arXiv.1704.04861</p>
+<p>Even with its limitations, I noticed several similarities between how the model learned and how people learn. Both can identify patterns by seeing examples rather than receiving a complete set of rules. Both also benefit from having more examples and from seeing greater variety within those examples.</p>
 
-    <p>Lake, B. M., Ullman, T. D., Tenenbaum, J. B., &amp; Gershman, S. J. (2017). Building machines that learn and think like people. <em>Behavioral and Brain Sciences, 40</em>, Article e253. https://doi.org/10.1017/S0140525X16001837</p>
+<p>Prior knowledge also plays an important role in both cases. The Teachable Machine classifier was able to learn from only 35 images because MobileNet had already been trained to recognize general visual features. In a different but comparable way, people use years of accumulated visual experience when learning to recognize something new. Neither begins the learning process with no prior knowledge at all.</p>
 
-    <p>Russell, S., &amp; Norvig, P. (2021). <em>Artificial intelligence: A modern approach</em> (4th ed.). Pearson.</p>
-  </div>
+<p>People and models can also focus on misleading shortcuts. The classifier treated head orientation as the main dividing feature because that was the easiest way to separate the training images. A child who sees only a narrow range of examples may make a similar mistake by treating an incidental feature as if it defines an entire category. Additional examples and corrections can help refine that understanding over time (Lake et al., 2017).</p>
 
-</section>
+<h3 class="l2">Differences</h3>
 
+<p>The similarities only go so far. Human learning is generally more flexible and efficient than the learning demonstrated by this model. A person can often recognize a new category after seeing only one or two examples, while a machine-learning model typically benefits from a larger and more varied training set.</p>
+
+<p>People also use context, meaning, and causal reasoning. A human observer understands that a facial expression and the direction a person is facing are different characteristics. The model does not understand either concept. It only identifies relationships between numerical image features and the labels it received (Lake et al., 2017; Russell &amp; Norvig, 2021).</p>
+
+<p>There is also a difference in how the results can be explained. A person can usually describe why an image belongs to a category. Teachable Machine provides confidence scores, but those scores do not explain the model's reasoning or identify the exact features that controlled the prediction.</p>
+
+<p>Human learning also continues across situations and combines information from multiple senses and experiences. The classifier's learning took place during a defined training session. Once training stopped, the model's parameters were fixed unless it was trained again. Retraining can introduce problems such as catastrophic forgetting, in which a system loses previously learned information while adapting to new data (Goodfellow et al., 2016).</p>
+
+<figure>
+  <table class="compare">
+    <caption><span class="fig-num">Table 1</span><br><span class="fig-title">Comparison of the Teachable Machine Model and Human Learning</span></caption>
+    <thead>
+      <tr><th>Dimension</th><th>Teachable Machine model</th><th>Human learning</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Data needed</td><td>Benefits from dozens or more labeled samples per class</td><td>Can sometimes learn from one or a few examples</td></tr>
+      <tr><td>Basis of learning</td><td>Statistical patterns in image features</td><td>Concepts, causes, meaning, and context</td></tr>
+      <tr><td>Prior knowledge</td><td>Fixed features learned during MobileNet pre-training</td><td>Flexible knowledge drawn from many experiences</td></tr>
+      <tr><td>Explanation</td><td>Produces confidence scores without explaining its reasoning</td><td>Can often explain and justify a choice</td></tr>
+      <tr><td>Learning over time</td><td>Remains fixed after training unless retrained</td><td>Continues and accumulates across experiences</td></tr>
+      <tr><td>Modality</td><td>Uses one input type within a particular model</td><td>Combines visual, verbal, physical, and social information</td></tr>
+    </tbody>
+  </table>
+</figure>
+
+<h2 class="l1">Conclusion</h2>
+
+<p>Building a classifier in Teachable Machine made the mechanics of supervised machine learning easier to understand than reading about them alone. The project showed how labeled examples are converted into numerical features and how a model adjusts its parameters to reduce prediction error. It also made concepts such as transfer learning, confidence scores, training-data quality, and unintended correlations much more concrete.</p>
+
+<p>The central lesson came from the weakness in my own experimental design. I intended one class to represent facial expressions and the other to represent camera perspectives. Because the two groups also differed in head orientation and hand placement, the model learned those more obvious visual patterns instead. A forward-facing image was classified as Class 1 with roughly 90 percent confidence even when I changed my expression. Turning my head caused a much larger change in the prediction.</p>
+
+<p>A human observer would understand that the question "What expression is this person making?" is different from "Which direction is this person facing?" The model did not know which question I intended to ask. It simply found the feature that most consistently separated the two groups of images.</p>
+
+<p>For me, the practical lesson is that the quality of a model begins with the way the problem and training data are defined. A strong algorithm cannot correct labels that represent mixed concepts or examples that contain unintended patterns. If I want a model to learn a specific distinction, I need to design the classes carefully, control unrelated variables, and test whether the model is responding to the intended feature.</p>
+
+<p>As I move further into analytical decision-making, that is the part of the exercise I am most likely to carry forward. A model's confidence can make its output appear credible, but the output is only as meaningful as the data and assumptions behind it.</p>
+
+<h2 class="l1">References</h2>
+<div class="references">
+  <p>Carney, M., Webster, B., Alvarado, I., Phillips, K., Howell, N., Griffith, J., Jongejan, J., Pitaru, A., &amp; Chen, A. (2020). Teachable Machine: Approachable web-based tool for exploring machine learning classification. In <em>Extended abstracts of the 2020 CHI conference on human factors in computing systems</em> (pp. 1&ndash;8). Association for Computing Machinery. <a href="https://doi.org/10.1145/3334480.3382839">https://doi.org/10.1145/3334480.3382839</a></p>
+
+  <p>Goodfellow, I., Bengio, Y., &amp; Courville, A. (2016). <em>Deep learning</em>. MIT Press.</p>
+
+  <p>Google. (n.d.). <em>Teachable Machine</em>. Retrieved October 3, 2026, from <a href="https://teachablemachine.withgoogle.com/">https://teachablemachine.withgoogle.com/</a></p>
+
+  <p>Howard, A. G., Zhu, M., Chen, B., Kalenichenko, D., Wang, W., Weyand, T., Andreetto, M., &amp; Adam, H. (2017). <em>MobileNets: Efficient convolutional neural networks for mobile vision applications</em>. arXiv. <a href="https://doi.org/10.48550/arXiv.1704.04861">https://doi.org/10.48550/arXiv.1704.04861</a></p>
+
+  <p>Lake, B. M., Ullman, T. D., Tenenbaum, J. B., &amp; Gershman, S. J. (2017). Building machines that learn and think like people. <em>Behavioral and Brain Sciences, 40</em>, Article e253. <a href="https://doi.org/10.1017/S0140525X16001837">https://doi.org/10.1017/S0140525X16001837</a></p>
+
+  <p>Russell, S., &amp; Norvig, P. (2021). <em>Artificial intelligence: A modern approach</em> (4th ed.). Pearson.</p>
+</div>
+
+</div>
 </body>
 </html>
