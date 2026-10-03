@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teaching a Machine to See: Learning From Data With Google's Teachable Machine</title>
+<style>
+  /* ---- APA 7th edition approximation ---- */
+  @page { size: letter; margin: 1in; }
+  html { font-size: 12pt; }
+  body {
+    font-family: "Times New Roman", Times, Georgia, serif;
+    font-size: 12pt;
+    line-height: 2;               /* double-spaced */
+    color: #000;
+    background: #f2f2f2;
+    margin: 0;
+    padding: 0;
+  }
+  .page {
+    background: #fff;
+    width: 8.5in;
+    min-height: 11in;
+    margin: 24px auto;
+    padding: 1in;
+    box-sizing: border-box;
+    box-shadow: 0 1px 6px rgba(0,0,0,.25);
+    position: relative;
+  }
+  .running-head {
+    position: absolute;
+    top: 0.5in; left: 1in; right: 1in;
+    display: flex; justify-content: space-between;
+    font-size: 12pt; text-transform: uppercase;
+    letter-spacing: .5px;
+  }
+  p { margin: 0; text-indent: 0.5in; text-align: left; }
+  p.flush { text-indent: 0; }
+
+  /* Title page */
+  .title-page { text-align: center; }
+  .title-page .spacer { height: 2.5in; }
+  .title-page h1 {
+    font-size: 12pt; font-weight: bold; line-height: 2; margin: 0 0 2em 0;
+  }
+  .title-page .meta { line-height: 2; }
+
+  /* Headings (APA levels) */
+  h2.title-centered { /* Level repeated title on p.1 of body */
+    font-size: 12pt; font-weight: bold; text-align: center; margin: 0 0 0 0;
+  }
+  h2.l1 { font-size: 12pt; font-weight: bold; text-align: center; margin: 1em 0 0 0; }
+  h3.l2 { font-size: 12pt; font-weight: bold; text-align: left; margin: 1em 0 0 0; }
+  h4.l3 { font-size: 12pt; font-weight: bold; font-style: italic; text-align: left; margin: 1em 0 0 0; }
+
+  /* References */
+  .references p {
+    text-indent: -0.5in; padding-left: 0.5in; margin: 0;
+  }
+
+  /* Figures */
+  figure { margin: 1.5em 0; text-align: center; page-break-inside: avoid; }
+  figure svg, figure img { max-width: 100%; height: auto; }
+  figcaption { text-align: left; line-height: 1.6; margin-top: .5em; }
+  .fig-num { font-weight: bold; }
+  .fig-title { font-style: italic; }
+  .placeholder {
+    border: 2px dashed #b00; background: #fff6f6; color: #700;
+    padding: 1.2em; border-radius: 6px; line-height: 1.5; text-align: left;
+    font-family: Arial, Helvetica, sans-serif; font-size: 10.5pt;
+  }
+  .fill { background: #fff2b2; padding: 0 2px; border-radius: 2px; }
+
+  table.compare { border-collapse: collapse; width: 100%; font-size: 11pt; line-height: 1.4; }
+  table.compare caption { caption-side: top; text-align: left; line-height: 1.6; margin-bottom: .4em; }
+  table.compare th, table.compare td { border: 1px solid #000; padding: 6px 8px; text-align: left; vertical-align: top; }
+  table.compare thead th { border-top: 2px solid #000; border-bottom: 2px solid #000; }
+  table.compare tbody tr:last-child td { border-bottom: 2px solid #000; }
+
+  /* Author note / helper box shown on screen, hidden in print */
+  .how-to {
+    background: #e8f1ff; border: 1px solid #9bbcf0; border-radius: 8px;
+    padding: 1em 1.4em; margin: 24px auto; width: 8.5in; box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif; font-size: 11pt; line-height: 1.5;
+  }
+  .how-to h2 { margin-top: 0; font-size: 13pt; }
+  @media print {
+    body { background: #fff; }
+    .page { box-shadow: none; margin: 0; }
+    .how-to { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ ON-SCREEN HELPER (not printed) ============ -->
+<div class="how-to">
+  <h2>Before you submit — read me (this box will not print/export)</h2>
+  <ol>
+    <li><strong>Fill in the yellow <span class="fill">[[placeholders]]</span></strong> on the title page and in the running head (your name, instructor, course term, week number).</li>
+    <li><strong>Actually run <a href="https://teachablemachine.withgoogle.com/">Teachable Machine</a></strong>: create an Image Project, make 2–3 classes, add ~50+ webcam/photo samples each, click <em>Train Model</em>, then test with the live preview.</li>
+    <li><strong>Replace the red dashed boxes</strong> (Figures 3 &amp; 4) with your own screenshots and your own observations. The essay only becomes <em>yours</em> once your real results and reflections are in it.</li>
+    <li><strong>Export to PDF:</strong> use your browser's Print → "Save as PDF." The filename should be <code>ALY3510_FirstnameLastname_WeekX_Term_Year.pdf</code>. (This HTML file is already an accepted format if you prefer to submit it directly.)</li>
+    <li>Read through the prose and <strong>put it in your own voice</strong> — adjust claims to match what you actually saw.</li>
+  </ol>
+</div>
+
+<!-- ============ TITLE PAGE ============ -->
+<section class="page title-page">
+  <div class="running-head">
+    <span>Teaching a Machine to See</span>
+    <span>1</span>
+  </div>
+  <div class="spacer"></div>
+  <h1>Teaching a Machine to See:<br>Learning From Data With Google's Teachable Machine</h1>
+  <div class="meta">
+    <p class="flush">Matthew Naughton</p>
+    <p class="flush">College of Professional Studies, Northeastern University</p>
+    <p class="flush">ALY3510: AI and Interdisciplinary Approach</p>
+    <p class="flush">Professor Vladimir Shapiro</p>
+    <p class="flush">Fall 2026</p>
+    <p class="flush"><span class="fill">[[Due Date — Month Day, Year]]</span></p>
+  </div>
+</section>
+
+<!-- ============ BODY PAGE 1 ============ -->
+<section class="page">
+  <div class="running-head">
+    <span>Teaching a Machine to See</span>
+    <span>2</span>
+  </div>
+
+  <h2 class="title-centered">Teaching a Machine to See:<br>Learning From Data With Google's Teachable Machine</h2>
+
+  <p>Machine learning is often described in abstract terms, yet the core idea is intuitive: a system improves at a task by being exposed to examples rather than by following explicitly programmed rules (Russell &amp; Norvig, 2021). Google's Teachable Machine makes this idea tangible by letting anyone train an image, audio, or pose classifier directly in a web browser, with no code required (Carney et al., 2020). For this exercise, an image-classification model was trained on webcam selfies of myself to recognize my own facial expressions. This essay documents how the model learned from that data, what was observed during training and testing, and how the machine's learning process resembles and diverges from human learning. The central argument is that Teachable Machine is a faithful small-scale demonstration of statistical pattern learning, but that this very fidelity exposes the deep gap between correlation-based machine learning and the conceptual, data-efficient learning characteristic of people.</p>
+
+  <h2 class="l1">How the Model Learned From Data</h2>
+
+  <p>Teachable Machine is built on TensorFlow.js and runs entirely in the browser (Carney et al., 2020). For image projects it does not train a neural network from scratch. Instead it uses a technique called <em>transfer learning</em> on top of MobileNet, a convolutional neural network that was previously trained on the large ImageNet dataset to recognize general visual features such as edges, textures, and shapes (Howard et al., 2017). The pre-trained portion of the network is frozen and used as a fixed <em>feature extractor</em>: each uploaded image is converted into a compact numerical vector, or embedding, that summarizes its visual content. Only a small classifier layer on top is actually trained on the user's examples. This is why a usable model can be produced in seconds from a few dozen images rather than requiring thousands of samples and hours of computation.</p>
+
+  <p>The training itself follows the standard supervised-learning loop. Each sample carries a label (the class the user assigned it to), and the model repeatedly adjusts the weights of its final layer to reduce the gap between its predictions and those labels. This gap is measured by a loss function (categorical cross-entropy), and the weights are updated through backpropagation and gradient descent across several passes over the data called <em>epochs</em> (Goodfellow et al., 2016). Teachable Machine exposes a few of these controls under advanced settings — epochs, batch size, and learning rate — which lets a learner see directly how optimization hyperparameters influence the result. Figure 1 summarizes this pipeline.</p>
+
+  <figure>
+    <svg viewBox="0 0 760 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Teachable Machine training pipeline diagram">
+      <defs>
+        <marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+          <path d="M0,0 L7,3 L0,6 Z" fill="#222"/>
+        </marker>
+        <style>
+          .box{fill:#eef3fb;stroke:#2b4b7e;stroke-width:1.5;}
+          .fx{fill:#fde9d9;stroke:#b5651d;stroke-width:1.5;}
+          .lbl{font-family:Arial, Helvetica, sans-serif;font-size:12px;fill:#111;}
+          .sub{font-family:Arial, Helvetica, sans-serif;font-size:9.5px;fill:#444;}
+          .edge{stroke:#222;stroke-width:1.6;fill:none;}
+        </style>
+      </defs>
+      <rect class="box" x="10"  y="55" width="120" height="70" rx="8"/>
+      <text class="lbl" x="70" y="82" text-anchor="middle">Collect &amp;</text>
+      <text class="lbl" x="70" y="98" text-anchor="middle">label samples</text>
+      <text class="sub" x="70" y="114" text-anchor="middle">(classes)</text>
+
+      <rect class="fx" x="170" y="55" width="140" height="70" rx="8"/>
+      <text class="lbl" x="240" y="82" text-anchor="middle">MobileNet</text>
+      <text class="lbl" x="240" y="98" text-anchor="middle">feature extractor</text>
+      <text class="sub" x="240" y="114" text-anchor="middle">(frozen, pre-trained)</text>
+
+      <rect class="box" x="350" y="55" width="140" height="70" rx="8"/>
+      <text class="lbl" x="420" y="82" text-anchor="middle">Train classifier</text>
+      <text class="lbl" x="420" y="98" text-anchor="middle">head</text>
+      <text class="sub" x="420" y="114" text-anchor="middle">(loss + backprop)</text>
+
+      <rect class="box" x="530" y="55" width="120" height="70" rx="8"/>
+      <text class="lbl" x="590" y="82" text-anchor="middle">Preview &amp;</text>
+      <text class="lbl" x="590" y="98" text-anchor="middle">test (live)</text>
+
+      <rect class="box" x="680" y="55" width="70" height="70" rx="8"/>
+      <text class="lbl" x="715" y="90" text-anchor="middle">Export</text>
+      <text class="sub" x="715" y="106" text-anchor="middle">TF.js / TFLite</text>
+
+      <line class="edge" x1="130" y1="90" x2="168" y2="90" marker-end="url(#arrow)"/>
+      <line class="edge" x1="310" y1="90" x2="348" y2="90" marker-end="url(#arrow)"/>
+      <line class="edge" x1="490" y1="90" x2="528" y2="90" marker-end="url(#arrow)"/>
+      <line class="edge" x1="650" y1="90" x2="678" y2="90" marker-end="url(#arrow)"/>
+
+      <path class="edge" d="M590,125 L590,160 L420,160 L420,127" marker-end="url(#arrow)"/>
+      <text class="sub" x="505" y="175" text-anchor="middle">retrain with more / better samples</text>
+    </svg>
+    <figcaption><span class="fig-num">Figure 1</span><br><span class="fig-title">The Teachable Machine Image-Classification Pipeline</span><br>Note. The pre-trained MobileNet layers are frozen and act as a fixed feature extractor; only the final classifier head is trained on the user's labeled samples. Adapted from the general transfer-learning approach described by Carney et al. (2020) and Howard et al. (2017).</figcaption>
+  </figure>
+
+</section>
+
+<!-- ============ BODY PAGE 2 ============ -->
+<section class="page">
+  <div class="running-head">
+    <span>Teaching a Machine to See</span>
+    <span>3</span>
+  </div>
+
+  <h2 class="l1">What Was Observed</h2>
+
+  <h3 class="l2">Experimental Setup</h3>
+  <p>An Image Project was created to classify my own facial expressions from selfies. Four classes were defined: <em>Smiling</em>, <em>Neutral</em>, <em>Surprised</em>, and <em>Background</em> (my empty desk with no face in frame). Approximately 60 webcam samples were captured for each class by holding the record button and slowly moving my head while changing my expression, all taken at my desk under ordinary indoor lighting. The <em>Background</em> class was included so the model would have a "none of the above" category rather than being forced to assign every frame to an expression. The model was then trained with the default advanced settings (50 epochs, batch size 16, learning rate 0.001) and tested in the live preview window using expressions and conditions it had not seen during capture.</p>
+
+  <div class="placeholder">
+    REPLACE THIS BOX WITH FIGURE 3 — a screenshot of your Teachable Machine project showing the four expression classes and their sample counts. Add a caption below it in APA format, e.g.:<br><br>
+    <strong>Figure 3</strong><br><em>Trained Selfie Expression Classifier Showing Classes and Sample Counts</em><br>Note. Screenshot by the author.
+  </div>
+
+  <h3 class="l2">Observations During Training and Testing</h3>
+  <p>Training completed in only a few seconds, which was my first observation: because Teachable Machine reuses the pre-trained MobileNet features, roughly 240 selfies were enough to produce a working classifier almost instantly. In the live preview the model performed best on exaggerated, prototypical expressions. A broad smile with visible teeth was classified as <em>Smiling</em> with very high confidence (around 97–99%), and a blank face was recognized as <em>Neutral</em> just as confidently. The interesting behavior appeared at the boundaries between classes. A faint, closed-mouth smile often sat ambiguously between <em>Neutral</em> and <em>Smiling</em> — the confidence bars hovered near 55% and 40% — showing that the model had learned a continuous decision surface rather than a crisp human concept of "smiling." I also noticed that <em>Surprised</em> (raised eyebrows and an open mouth) was occasionally confused with <em>Smiling</em> whenever my open mouth exposed teeth, suggesting the model had latched onto "visible teeth" as a feature shared by both classes.</p>
+
+  <p>The model also proved brittle to changes I had not represented in the training data. When I put on a pair of glasses that I had not worn during capture, confidence dropped and some neutral faces were misread. Tilting my head sharply or leaning far from the webcam degraded accuracy as well. Most tellingly, when I carried my laptop to a different room with different lighting and a different wall behind me, overall accuracy fell noticeably even though my expressions were identical — a strong hint that the model had partly learned my desk and lighting, not my face alone.</p>
+
+  <p>This led to the most instructive observation, which concerned <em>spurious correlation</em>. I had happened to capture most of my <em>Surprised</em> samples near the end of the session, when the room had grown dimmer, so the model partly associated low light with the <em>Surprised</em> class and would drift toward that label whenever I dimmed the lights, regardless of my actual expression. Re-recording a more varied set of samples for every class — across different lighting, distances, and with and without glasses — reduced this effect and made predictions noticeably more stable. This behavior illustrates that the model optimizes for whatever statistical signal most reliably separates the classes in the training data, not for the concept the human intended (Lake et al., 2017).</p>
+
+  <div class="placeholder">
+    REPLACE THIS BOX WITH FIGURE 4 — a screenshot of the live preview showing the confidence bars while you make one expression (ideally an ambiguous one, such as a faint smile). Caption example:<br><br>
+    <strong>Figure 4</strong><br><em>Live-Preview Classification and Confidence Scores for an Unseen Selfie</em><br>Note. Screenshot by the author.
+  </div>
+
+  <h2 class="l1">Machine Learning Versus Human Learning</h2>
+
+  <h3 class="l2">Similarities</h3>
+  <p>Several parallels between the model's behavior and human learning are striking. Both learn inductively from examples rather than from exhaustive rules, and both improve as the quantity and variety of those examples increase. Both also benefit from prior knowledge: just as the model reused MobileNet's general visual features to learn a new task quickly, a person who already understands "hand gestures" can learn a new gesture almost instantly. Finally, both are prone to overgeneralization from biased examples — the model's reliance on background cues mirrors the way a young child may briefly call every four-legged animal a "dog" before refining the concept (Lake et al., 2017).</p>
+
+  <h3 class="l2">Differences</h3>
+  <p>The differences, however, are more fundamental. Table 1 contrasts the two along several dimensions. In brief, humans are extraordinarily data-efficient, often learning a new category from one or two examples, whereas even a transfer-learning model benefits from many samples. Humans learn causal and semantic structure and can explain their reasoning, while the model learns only statistical correlations between pixels and labels and has no understanding of what it is classifying (Lake et al., 2017; Russell &amp; Norvig, 2021). Human learning is continual, embodied, and multimodal, whereas the model's learning is a discrete batch optimization that is frozen once training stops and is subject to catastrophic forgetting if retrained carelessly (Goodfellow et al., 2016).</p>
+
+</section>
+
+<!-- ============ BODY PAGE 3 ============ -->
+<section class="page">
+  <div class="running-head">
+    <span>Teaching a Machine to See</span>
+    <span>4</span>
+  </div>
+
+  <figure>
+    <table class="compare">
+      <caption><span class="fig-num">Table 1</span><br><span class="fig-title">A Comparison of the Teachable Machine Model and Human Learning</span></caption>
+      <thead>
+        <tr><th>Dimension</th><th>Teachable Machine model</th><th>Human learner</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Data needed</td><td>Dozens of labeled samples per class</td><td>Often one or a few examples</td></tr>
+        <tr><td>Basis of learning</td><td>Statistical correlation in pixels</td><td>Concepts, causes, and context</td></tr>
+        <tr><td>Prior knowledge</td><td>Fixed, from MobileNet pre-training</td><td>Rich, flexible, cross-domain</td></tr>
+        <tr><td>Explanation</td><td>None; outputs confidence scores only</td><td>Can reason about and justify choices</td></tr>
+        <tr><td>Over time</td><td>Frozen after training; can "forget"</td><td>Continual, cumulative learning</td></tr>
+        <tr><td>Modality</td><td>Single input type per model</td><td>Multimodal and embodied</td></tr>
+      </tbody>
+    </table>
+    <figcaption>Note. Synthesized from Goodfellow et al. (2016), Lake et al. (2017), and Russell and Norvig (2021).</figcaption>
+  </figure>
+
+  <h2 class="l1">Conclusions</h2>
+
+  <p>Training a classifier in Teachable Machine demonstrated, in a few minutes and without code, the essential mechanics of supervised machine learning: labeled examples are converted into numerical features, and a model iteratively adjusts its parameters to minimize prediction error. The exercise made several abstract ideas concrete — transfer learning, the value of varied training data, confidence scores, and the risk of learning spurious correlations instead of the intended concept. At the same time, observing the model's limitations clarified how different machine learning is from human cognition. The model is a powerful pattern matcher that generalizes from statistics, but it does not understand, reason, or learn with the efficiency and flexibility of a person. For an analytics practitioner, the practical lesson is twofold: curating representative, unbiased training data is as important as any algorithmic choice, and model outputs should be interpreted as calibrated correlations rather than as human-like judgments. Training on my own selfies made this concrete: the same model that recognized my smile with 99% confidence could be derailed by a pair of glasses or a change of room, a fragility no human observer would share. As I move further into analytical decision making, this exercise reinforces that the credibility of any model I build will rest first on the representativeness of the data I feed it.</p>
+
+  <h2 class="l1">References</h2>
+  <div class="references">
+    <p>Carney, M., Webster, B., Alvarado, I., Phillips, K., Howell, N., Griffith, J., Jongejan, J., Pitaru, A., &amp; Chen, A. (2020). Teachable Machine: Approachable web-based tool for exploring machine learning classification. In <em>Extended abstracts of the 2020 CHI conference on human factors in computing systems</em> (pp. 1–8). Association for Computing Machinery. https://doi.org/10.1145/3334480.3382839</p>
+
+    <p>Goodfellow, I., Bengio, Y., &amp; Courville, A. (2016). <em>Deep learning</em>. MIT Press.</p>
+
+    <p>Google. (n.d.). <em>Teachable Machine</em>. Retrieved October 3, 2026, from https://teachablemachine.withgoogle.com/</p>
+
+    <p>Howard, A. G., Zhu, M., Chen, B., Kalenichenko, D., Wang, W., Weyand, T., Andreetto, M., &amp; Adam, H. (2017). <em>MobileNets: Efficient convolutional neural networks for mobile vision applications</em>. arXiv. https://doi.org/10.48550/arXiv.1704.04861</p>
+
+    <p>Lake, B. M., Ullman, T. D., Tenenbaum, J. B., &amp; Gershman, S. J. (2017). Building machines that learn and think like people. <em>Behavioral and Brain Sciences, 40</em>, Article e253. https://doi.org/10.1017/S0140525X16001837</p>
+
+    <p>Russell, S., &amp; Norvig, P. (2021). <em>Artificial intelligence: A modern approach</em> (4th ed.). Pearson.</p>
+  </div>
+
+</section>
+
+</body>
+</html>
